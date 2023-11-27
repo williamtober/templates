@@ -2,8 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeWindStyleSheet } from 'nativewind';
+// REDUX
+import { Provider } from 'react-redux';
 // defined router
 import Router from './router';
+import store from './redux/';
 
 // set the output to native for nativewind
 NativeWindStyleSheet.setOutput({
@@ -12,10 +15,13 @@ NativeWindStyleSheet.setOutput({
 
 export default function App() {
   return (
-    <NavigationContainer>
-      {/* ROUTER HERE */}
-      <Router />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        {/* ROUTER HERE */}
+        <Router />
+      </NavigationContainer>
+    </Provider>
+    
   );
 }
 

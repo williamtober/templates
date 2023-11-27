@@ -2,10 +2,18 @@ import { View, Text, useColorScheme } from 'react-native';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { useState } from 'react';
 // REDUX IMPORTS WOULD GO HERE
+import { useSelector, useDispatch } from 'react-redux';
+import { selectItemLoading, setLoading as setStateLoading, selectItems } from '../../redux/item';
 
 const Loading = () => {
-    const [loading, setLoading] = useState<Boolean>(true);
-    const [attempt, setAttempt] = useState<Boolean>(true);
+    // loading page will directly follow the redux setup for item
+    const loading = useSelector(selectItemLoading);
+
+    console.log('loading', loading);
+
+    // init dispatch
+    const dispatch = useDispatch();
+    
 
     const handleLoading = async () => {
         // Logic for loading here
@@ -13,15 +21,13 @@ const Loading = () => {
         // global style in redux setup.
 
         // fetch 
-
         // set loading to false
         setTimeout(() => {
-            setLoading(false);
-            setAttempt(false);
+            dispatch(setStateLoading(false));
         }, 2000)
     }
 
-    if(attempt) handleLoading();
+    if(loading) handleLoading();
 
     return loading ? (
         <View>
