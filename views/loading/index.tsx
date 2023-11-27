@@ -3,17 +3,14 @@ import { useNavigation, StackActions } from '@react-navigation/native';
 import { useState } from 'react';
 // REDUX IMPORTS WOULD GO HERE
 import { useSelector, useDispatch } from 'react-redux';
-import { selectItemLoading, setLoading as setStateLoading, selectItems } from '../../redux/item';
+import { selectItemLoading, setLoading as setStateLoading } from '../../redux/item';
 
 const Loading = () => {
     // loading page will directly follow the redux setup for item
     const loading = useSelector(selectItemLoading);
 
-    console.log('loading', loading);
-
     // init dispatch
     const dispatch = useDispatch();
-    
 
     const handleLoading = async () => {
         // Logic for loading here
@@ -26,7 +23,7 @@ const Loading = () => {
             dispatch(setStateLoading(false));
         }, 2000)
     }
-
+    
     if(loading) handleLoading();
 
     return loading ? (
